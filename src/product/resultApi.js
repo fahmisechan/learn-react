@@ -6,11 +6,34 @@ export function ResultApi() {
     
 const [data,setData] = useState();
 
+const test = {
+    data : 1,
+    title : 'berhasil'
+}
+
 useEffect(() => {
     API.getApiTest().then(res => {
         setData(res)
     })
 }, []);
+
+const postApi = (test) => {
+    API.postApiTest(test).then(res => {
+        console.log(res);
+    })
+}
+
+const putApi = (id,data) => {
+    API.putApiTest(id,data).then(res => {
+        console.log(res);
+    })
+}
+
+const deleteApi = (id) => {
+    API.deleteApiTest(id).then(res => {
+        console.log(res)
+    })
+}
     return (
         <>
         <rootContext.Consumer>
@@ -30,6 +53,9 @@ useEffect(() => {
             }}
           
         </rootContext.Consumer>
+        <button type="button" onClick={() => postApi(test)}>Testing Post</button>
+        <button type="button" onClick={() => putApi(1,test)}>Testing PUT</button>
+        <button type="button" onClick={() => deleteApi(1)}>Testing DELETE</button>
         <div>
                 {JSON.stringify(data)}
             </div>
